@@ -9,6 +9,7 @@ class TestA(object):
     @classmethod
     def setup_class(klass):
         """This method is run once for each class before any tests are run"""
+        print('test')
 
     @classmethod
     def teardown_class(klass):
