@@ -1,14 +1,13 @@
 #!/bin/bash
 set -x
+echo "=== install Anaconda for nose2"
 echo $HOME
 ls -al
 wget https://repo.continuum.io/archive/Anaconda3-4.2.0-Linux-x86_64.sh
 bash $WORKSPACE/Anaconda3-4.2.0-Linux-x86_64.sh -b -p $HOME/anaconda3
 export PATH=$HOME/anaconda3/bin:$PATH
-## install nose
-which python
-which python3
 python3 -V
+echo "=== install nose2"
 which pip
 pip install --upgrade pip
 pip install --user nose2
@@ -17,8 +16,7 @@ which nose2
 ls -al $HOME/anaconda3
 ls -al $HOME/anaconda3/bin
 ls -al $HOME/.local/bin
-echo "== RUN nose2"
-pwd
+echo "=== run  nose2"
 nose2
-ls -al
+echo "=== test results...."
 ls -al results
