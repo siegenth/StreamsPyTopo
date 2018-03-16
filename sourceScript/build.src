@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+set -x
+echo "==== The environment "
+ls -al
+env
+echo "==== Python 3.5 Install..."
+wget https://repo.continuum.io/archive/Anaconda3-4.2.0-Linux-x86_64.sh
+bash $WORKSPACE/Anaconda3-4.2.0-Linux-x86_64.sh -b -p $HOME/anaconda3
+export PATH=$HOME/anaconda3/bin:$PATH
+echo "==== Python verify..."
+#ls $HOME/anaconda3/bin
+which pip
+which python3
+python3 -V
+
+echo "==== Java8 enable : for streams topology"
+export JAVA_HOME=$JAVA8_HOME
+export PATH=$JAVA_HOME/bin:$PATH
+java -version
+
+echo "==== Expand/Install toolkits"
+cd ${HOME}toolkits
+tar -xf messagehub.tar
+tar -xf streamsx.inet-master.tar
+ls -al
+cd ${HOME}
+
+echo "==== install python dependencies "
+#pip install --user nose
+pip install --user streamsx
+#pip install --user -e $WORKSPACE/python/package
+#
+echo "==== Build & Deploy : SmokePending"
+which python3
+python3 SmokePending.py
+mkdir target
