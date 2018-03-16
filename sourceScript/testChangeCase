@@ -1,4 +1,3 @@
-#!/bin/bash
 set -x
 echo "=== install Anaconda for nose2"
 echo $HOME
