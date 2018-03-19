@@ -14,7 +14,10 @@ I've bound the script to the job of a stage using the ${IDS_JOB_NAME}.
 The concept is to have the scripts checked in, 
 look for the scripts in the ${HOME}/scripts directory. 
 
-In the situations where we need credentials. Before this code starts,
+### Credenitals
+Credentials (VCAP) are necessary for building and running in the Cloud, 
+in these situations where we need expand/decrypt the credential's file. 
+Before this code starts,
 the credential.py is unzipped from credential.pyz. 
 This is the 'Build script' for the buildDeploy job of BuildDeployTopo 
 pipline. 
