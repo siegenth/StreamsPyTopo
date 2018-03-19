@@ -20,7 +20,7 @@ This is the 'Build script' for the buildDeploy job of BuildDeployTopo
 pipline. 
 ```bash
 #!/bin/bash
-zip --password <password> credenital.pyz credential.py
+unzip -P <password> -o credential.pyz
 source scripts/${IDS_JOB_NAME}
 ```
 When you generate a new credentials file use following command 
