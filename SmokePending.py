@@ -1,6 +1,7 @@
 import sys
 import pickle
 import common
+import credential
 from streamsx.topology.topology import *
 from streamsx.topology.schema import *
 from  streamsx.topology import context
@@ -26,7 +27,7 @@ def lowerString(tuple):
 
 
 class webLog():
-    """Example of class definition. The __init__() is executed at build time,
+    """Example of class definition. The __init__() is executed at scripts time,
     on the submitters node. When it runs, the value(s) preamble are extacted
     and used.
     """
@@ -83,7 +84,7 @@ def smokePending(inetToolkit, buildType, port):
     """ 
     pending_source.complete(processingDone)  # close the loop
 
-SEVERE: Streaming Analytics service (StreamingTurbine): The submitted archive tk5385353137138356122.zip failed to build with status failed.
+SEVERE: Streaming Analytics service (StreamingTurbine): The submitted archive tk5385353137138356122.zip failed to scripts with status failed.
 Exception in thread "main" java.lang.IllegalStateException: Error submitting archive for compilation:
 "tk5385353137138356122/SmokePending/SmokePending.spl:5:1: CDISP0011E ERROR: A syntax error exists at the '}' token in 'graph'."
     """
@@ -91,10 +92,9 @@ Exception in thread "main" java.lang.IllegalStateException: Error submitting arc
     #
     #   Compile & Submit the Topology to Streams instance
     #
-    streams_conf = common.build_streams_config(common.turbineName, common.turbineCredentials)
+
+    streams_conf = common.build_streams_config("StreamingTurbine", credential.serviceCredentials)
     context.submit(context.ContextTypes.STREAMING_ANALYTICS_SERVICE, topo, config=streams_conf)
-
-
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Generate and submit ML app, data files are built with mi_build.py')
@@ -103,7 +103,7 @@ if __name__ == '__main__':
                         action='store_true')
     parser.add_argument('--port', help="Host's port the application is accepts requests on.", default="8080")
     parser.add_argument('--buildType',
-                        help="Either 'DISTRIBUTED' or 'BUNDLE' determines if build+submit or just build.",
+                        help="Either 'DISTRIBUTED' or 'BUNDLE' determines if scripts+submit or just scripts.",
                         default="DISTRIBUTED")
 
     parser.add_argument('--version', action='version', version='%(prog) .5')

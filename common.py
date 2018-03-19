@@ -21,7 +21,7 @@ move them in here, needed to connect to the
 service. 
 """
 
-turbineName = "StreamingTurbine"
+"""
 turbineCredentials = {
   "apikey": "1dNgWPMeLtS6PndZMFdP6qY4NiL9HixnFLetpJt1r2Nn",
   "bundles_path": "/jax-rs/bundles/service_instances/30b4f155-7348-4836-a120-bf7608ac5c7d/service_bindings/35ba6f38-d2eb-4f53-a2be-63178a4fda86",
@@ -43,7 +43,7 @@ turbineCredentials = {
   "v2_rest_url": "https://streams-app-service.ng.bluemix.net/v2/streaming_analytics/30b4f155-7348-4836-a120-bf7608ac5c7d"
 }
 TurbineDefinition = [turbineName, turbineCredentials]
-
+"""
 def build_streams_config(service_name, credentials):
     vcap_conf = {
         'streaming-analytics': [
