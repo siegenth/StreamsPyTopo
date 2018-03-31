@@ -66,7 +66,7 @@ def on_open(socket):
         "type": "subscribe",
         "channels": [{"name": "ticker", "product_ids": ["BTC-USD", "ETH-USD", "LTC-USD"]}]
     }
-    fo = open("/Users/siegenth/gdax.json", "w")
+    fo = open("gdax.json", "w")
     socket.send(dumps(params))
 
 
