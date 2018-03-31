@@ -21,6 +21,7 @@ cd ${WORKSPACE}
 
 echo "==== install python dependencies "
 pip install --user streamsx
+pip install --user websocket-client
 #pip install --user -e $WORKSPACE/python/package
 #
 echo "==== Build & Deploy : SmokePending"
