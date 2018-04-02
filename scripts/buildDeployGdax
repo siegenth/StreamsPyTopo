@@ -29,6 +29,7 @@ which python3
 echo "==== archive"
 ls -al
 ls -al ${ARCHIVE_DIR}
+mkdir ${ARCHIVE_DIR}
 echo "Value of archive: ${ARCHIVE_DIR}"
 python3 GdaxStream.py
 if [ $? -eq 0 ]; then
