@@ -37,6 +37,6 @@ if [ $? -eq 0 ]; then
     echo "==== Build Success"
     touch ${ARCHIVE_DIR}/build_deploy_done
 fi
-ls -al ${ARCHIVE_DIR}
+cat ${ARCHIVE_DIR}/gdax.json
 
 
