@@ -26,12 +26,13 @@ pip install --user websocket-client
 #
 echo "==== Build & Deploy : SmokePending"
 which python3
+mkdir ${ARCHIVE_DIR}
 python3 GdaxStream.py
 if [ $? -eq 0 ]; then
     echo OK
     echo "==== Build Success"
-    mkdir ${ARCHIVE_DIR}
     touch ${ARCHIVE_DIR}/build_deploy_done
 fi
+ls -al ${ARCHIVE_DIR}
 
 

@@ -54,6 +54,8 @@ def on_message(_, message):
     fo.write(dumps(obj) + ",\n")
     fo.flush()
     msgCount += 1
+    if msgCount > 10:
+        exit(0)
     print("**** MessageCount: %s" % str(msgCount))
 
 def on_open(socket):
@@ -66,7 +68,7 @@ def on_open(socket):
         "type": "subscribe",
         "channels": [{"name": "ticker", "product_ids": ["BTC-USD", "ETH-USD", "LTC-USD"]}]
     }
-    fo = open("gdax.json", "w")
+    fo = open("archive/gdax.json", "w")
     socket.send(dumps(params))
 
 
