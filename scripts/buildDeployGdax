@@ -26,7 +26,10 @@ pip install --user websocket-client
 #
 echo "==== Build & Deploy : SmokePending"
 which python3
-mkdir ${ARCHIVE_DIR}
+echo "==== archive"
+ls -al
+ls -al ${ARCHIVE_DIR}
+echo "Value of archive: ${ARCHIVE_DIR}"
 python3 GdaxStream.py
 if [ $? -eq 0 ]; then
     echo OK
