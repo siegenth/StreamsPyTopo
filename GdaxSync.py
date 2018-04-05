@@ -7,10 +7,10 @@ from streamsx.topology import context
 from websocket import create_connection
 import streamsx.spl.op as op
 from json import dumps, loads
-import time
+#import time
 import argparse
 
-from pprint import pprint
+#from pprint import pprint
 """
 GdaxSync - simple application that 
 """
@@ -20,24 +20,24 @@ def scrubMessage(message):
 
     if ('type' not in obj):
         print("** No type field ")
-        pprint(obj)
+        #pprint(obj)
         print("** No type End ")
         return None
     if (obj['type'] == "subscriptions"):
         print("- Subscription Message")
-        pprint(obj)
+        #pprint(obj)
         print("- Subscription End ")
         return None
     if (obj['type'] != "ticker"):
         print("** Unknown type")
-        pprint(obj)
+        #pprint(obj)
         print("** Unknown End ")
         return None
     # All message should be ticker with full complement of fields.
     # But - in the beginning 'trade_in' is missing, sometimes.
     if "trade_id" not in obj:
         print("** Missing - trade_id field  ")
-        pprint(obj)
+        #pprint(obj)
         print("** Missing - End ")
         return None
     obj["ttype"] = obj["type"]
@@ -99,7 +99,7 @@ def gdaxFeed(inetToolkit, buildType, port):
     rawRequest = op.Sink("com.ibm.streamsx.inet.rest::HTTPTupleView",
                         stream=ethWin,
                         params={'port': 8080,
-                                'context':'gdaxLive',
+                                'context':'gdaxEth',
                                 'contextResourceBase': '/base'},
                         name="TupleView")
 
