@@ -14,13 +14,6 @@ from pprint import pprint
 """
 GdaxSync - simple application that 
 """
-URL = "wss://ws-feed.gdax.com"
-
-# Descibe what you want from gdax.
-params = {
-    "type": "subscribe",
-    "channels": [{"name": "ticker", "product_ids": ["BTC-USD", "ETH-USD", "LTC-USD"]}]
-}
 
 def scrubMessage(message):
     obj = loads(message)
@@ -66,11 +59,15 @@ def scrubMessage(message):
 
 
 def gdaxData():
+    URL = "wss://ws-feed.gdax.com"
+    params = {
+        "type": "subscribe",
+        "channels": [{"name": "ticker", "product_ids": ["BTC-USD", "ETH-USD", "LTC-USD"]}]
+    }
+
     ws = create_connection(URL)
     ws.send(dumps(params))
-    print("Sent")
-    print("Receiving...")
-    time.sleep(2)
+
     while True:
         scrubbed = scrubMessage(ws.recv())
         if (scrubbed is not None):
