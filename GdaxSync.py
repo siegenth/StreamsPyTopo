@@ -102,8 +102,7 @@ def gdaxFeed(inetToolkit, buildType, port):
     rawRequest = op.Sink("com.ibm.streamsx.inet.rest::HTTPTupleView",
                         stream=ethWin,
                         params={'port': 8080,
-                                #'responseJsonAttributeName': 'string',
-                                'context':'myStreams',
+                                'context':'gdaxLive',
                                 'contextResourceBase': '/base'},
                         name="TupleView")
 

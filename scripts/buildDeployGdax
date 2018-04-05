@@ -14,7 +14,7 @@ java -version
 
 echo "==== Expand/Install toolkits"
 cd ${WORKSPACE}/toolkits
-tar -xf messagehub.tar
+#tar -xf messagehub.tar
 tar -xf streamsx.inet-master.tar
 ls -al
 cd ${WORKSPACE}
@@ -31,12 +31,11 @@ ls -al
 mkdir ${ARCHIVE_DIR}
 ls -al ${ARCHIVE_DIR}
 echo "Value of archive: ${ARCHIVE_DIR}"
-python3 GdaxStream.py
+python3 GdaxSync.py
 if [ $? -eq 0 ]; then
     echo OK
     echo "==== Build Success"
     touch ${ARCHIVE_DIR}/build_deploy_done
 fi
-cat ${ARCHIVE_DIR}/gdax.json
 
 
