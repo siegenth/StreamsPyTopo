@@ -24,7 +24,8 @@ ls -al
 cd ${WORKSPACE}
 
 echo "==== install python dependencies "
-pip install --user streamsx
+pip install --user streamsx==1.9.1a0
+pip show streamsx
 pip install --user websocket-client
 #pip install --user -e $WORKSPACE/python/package
 #
