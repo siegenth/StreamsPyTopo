@@ -6,10 +6,11 @@ from streamsx.topology.schema import *
 from streamsx.topology import context
 from websocket import create_connection
 import streamsx.spl.op as op
-import json as jsn
+#import json as jsn
 #from json import dumps, loads
 #import time
 import argparse
+
 
 #from pprint import pprint
 """
@@ -17,7 +18,7 @@ GdaxSync - simple application that
 """
 
 def scrubMessage(message):
-    obj = jsn.loads(message)
+    obj = json.loads(message)
 
     if ('type' not in obj):
         print("** No type field ")
@@ -67,7 +68,7 @@ def gdaxData():
     }
 
     ws = create_connection(URL)
-    ws.send(jsn.dumps(params))
+    ws.send(json.dumps(params))
 
     while True:
         scrubbed = scrubMessage(ws.recv())
