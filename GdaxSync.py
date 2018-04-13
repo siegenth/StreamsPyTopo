@@ -6,9 +6,6 @@ from streamsx.topology.schema import *
 from streamsx.topology import context
 from websocket import create_connection
 import streamsx.spl.op as op
-#import json as jsn
-#from json import dumps, loads
-#import time
 import argparse
 
 
@@ -111,12 +108,11 @@ def gdaxFeed(inetToolkit, buildType, port):
     streams_conf = common.build_streams_config("StreamingTurbine", credential.serviceCredentials)
     context.submit(context.ContextTypes.STREAMING_ANALYTICS_SERVICE, topo, config=streams_conf)
 
-
-def test():
-    print("enter")
-    tmp = gdaxData()
-    while True:
-        print(tmp.__next__())
+    def test():
+        print("enter")
+        tmp = gdaxData()
+        while True:
+            print(tmp.__next__())
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Build & Deploy WebSocket Stream from gdax data.')
