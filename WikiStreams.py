@@ -10,7 +10,8 @@ import streamsx.spl.op as op
 import argparse
 
 
-def wikiStream(url):
+def wikiStream():
+    url = 'https://stream.wikimedia.org/v2/stream/recentchange'
     for event in EventSource(url):
         """Thie fields that are specified by SSE: event, data, id, retry """
         if event.event == 'message':
@@ -47,14 +48,14 @@ def wikiStream(url):
             pass
             #print('{user} edited {title}'.format(**change))
 
-url = 'https://stream.wikimedia.org/v2/stream/recentchange'
+
 #url = "https://proxy.streamdata.io/http://stockmarket.streamdata.io/prices/"
 
 
 
 def wikiFeed(inetToolkit, buildType, port):
     # Sumbit request Build Server and Submit.
-    schemaTicker = 'tuple<rstring dataId, boolean bot, rstring domain, lenOld int32, lenNew int32, SSEdata rstring, SSEevent>'
+    schemaTicker = 'tuple<rstring dataId, rstring bot, rstring domain, int32 lenOld,int32 lenNew, rstring SSEdata, rstring SSEevent>'
     #
     #    Define the application
     #
@@ -62,7 +63,7 @@ def wikiFeed(inetToolkit, buildType, port):
 
     tk.add_toolkit(topo, inetToolkit)
 
-    source = topo.source(wikiStream(url))
+    source = topo.source(wikiStream)
     # Only one type of event, verity that I got it right.
     event = source.filter(lambda t: t["SSEevent"] == "message", name="eventFilter")
     event.print(name="eth")
@@ -71,7 +72,7 @@ def wikiFeed(inetToolkit, buildType, port):
     eventWin = eventTuple.last(100).trigger(1)
     rawRequest = op.Sink("com.ibm.streamsx.inet.rest::HTTPTupleView",
                         stream=eventWin,
-                        params={'port': 8080,
+                        params={'port': 8081,
                                 'context':'gdaxEth',
                                 'contextResourceBase': '/base'},
                         name="TupleView")
@@ -93,7 +94,7 @@ if __name__ == '__main__':
     parser.add_argument('--inetToolkit', help="Path to the INet tookit, with the new operator.",
                         default="./toolkits/streamsx.inet-master/com.ibm.streamsx.inet",
                         action='store_true')
-    parser.add_argument('--port', help="Host's port the application is accepts requests on.", default="8080")
+    parser.add_argument('--port', help="Host's port the application is accepts requests on.", default="8081")
     parser.add_argument('--buildType',
                         help="Either 'DISTRIBUTED' or 'BUNDLE' determines if scripts+submit or just scripts.",
                         default="DISTRIBUTED")
