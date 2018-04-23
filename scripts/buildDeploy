@@ -4,12 +4,19 @@ ls -al
 env
 echo "==== Python 3.5 Install..."
 wget https://repo.continuum.io/archive/Anaconda3-4.2.0-Linux-x86_64.sh
-bash $WORKSPACE/Anaconda3-4.2.0-Linux-x86_64.sh -b -p $HOME/anaconda3
-export PATH=$HOME/anaconda3/bin:$PATH
+
+#bash $WORKSPACE/Anaconda3-4.2.0-Linux-x86_64.sh -b -p $HOME/anaconda3
+#export PATH=$HOME/anaconda3/bin:$PATH
+
+bash $WORKSPACE/Anaconda3-4.2.0-Linux-x86_64.sh -b -p ./anaconda3
+export PATH=./anaconda3/bin:$PATH
+
 echo "==== Python verify..."
 which pip
 which python3
 python3 -V
+echo "HOME : ${HOME}"
+"
 
 echo "==== Java8 enable : for streams topology"
 export JAVA_HOME=$JAVA8_HOME
