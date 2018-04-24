@@ -28,7 +28,7 @@ cd ${WORKSPACE}
 
 echo "==== Install python dependencies"
 echo "==== This should be pulled from github - hold off install"
-echo "==== Had issues with this pip install
+echo "==== Had issues with this pip install"
 python3 -m pip install --user streamsx
 touch build_collect_done
 
