@@ -1,0 +1,36 @@
+set -x
+echo "=== Collect the components for build and deploy."
+echo "=== Components are moved between stages, do NOT refetch"
+echo "=== the components after the this stage!"
+ls -al
+env
+echo "==== Fetch and Install Python 3.5 Install..."
+wget https://repo.continuum.io/archive/Anaconda3-4.2.0-Linux-x86_64.sh
+bash $WORKSPACE/Anaconda3-4.2.0-Linux-x86_64.sh -b -p ./anaconda3
+export PATH=./anaconda3/bin:$PATH
+
+echo "==== Python verify..."
+which pip
+which python3
+python3 -V
+
+echo "==== Java8 enable : for streams topology"
+export JAVA_HOME=$JAVA8_HOME
+export PATH=$JAVA_HOME/bin:$PATH
+java -version
+
+echo "==== Expand/Install toolkits in WORKSPACE : ${WORKSPACE}"
+cd ${WORKSPACE}/toolkits
+tar -xf messagehub.tar
+tar -xf streamsx.inet-master.tar
+ls -al
+cd ${WORKSPACE}
+
+echo "==== Install python dependencies"
+echo "==== This should be pulled from github - hold off install"
+echo "==== Had issues with this pip install
+python3 -m pip install --user streamsx
+touch build_collect_done
+
+
+
